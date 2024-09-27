@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Function to calculate Net Salary
+function calculateNetSalary(basicSalary, benefits) {
+    // Constants for deductions
+    const PAYEE_RATE = 0.3; // 30% tax
+    const NHIF_RATE = 0.05; // 5% NHIF
+    const NSSF_RATE = 0.06; // 6% NSSF
+
+    // Calculate gross salary
+    const grossSalary = basicSalary + benefits;
+
+    // Calculate deductions
+    const payee = grossSalary * PAYEE_RATE;
+    const nhifDeductions = grossSalary * NHIF_RATE;
+    const nssfDeductions = grossSalary * NSSF_RATE;
+
+    // Calculate net salary
+    const totalDeductions = payee + nhifDeductions + nssfDeductions;
+    const netSalary = grossSalary - totalDeductions;
+
+    // Return the results
+    return {
+        grossSalary: grossSalary.toFixed(2),
+        payee: payee.toFixed(2),
+        nhifDeductions: nhifDeductions.toFixed(2),
+        nssfDeductions: nssfDeductions.toFixed(2),
+        netSalary: netSalary.toFixed(2)
+    };
+}
+
+// Function to prompt user for input and display results
+function getSalaryDetails() {
+    const basicSalary = parseFloat(prompt("Enter your basic salary: "));
+    const benefits = parseFloat(prompt("Enter your benefits: "));
+
+    if (isNaN(basicSalary) || isNaN(benefits)) {
+        alert("Please enter valid numbers for salary and benefits.");
+        return;
+    }
+
+    const salaryDetails = calculateNetSalary(basicSalary, benefits);
+    
+    // Display the results
+    alert(`Gross Salary: Ksh ${salaryDetails.grossSalary}\n` +
+          `PAYEE (Tax): Ksh ${salaryDetails.payee}\n` +
+          `NHIF Deductions: Ksh ${salaryDetails.nhifDeductions}\n` +
+          `NSSF Deductions: Ksh ${salaryDetails.nssfDeductions}\n` +
+          `Net Salary: Ksh ${salaryDetails.netSalary}`);
+}
+
+// Call the function to get salary details
+getSalaryDetails();
+
+    </script>
+</body>
+</html>
